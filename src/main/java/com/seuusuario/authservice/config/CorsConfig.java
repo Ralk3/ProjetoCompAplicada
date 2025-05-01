@@ -1,4 +1,4 @@
-package com.seuusuario.authservice.config; // <- coloca o seu package certinho aqui
+package com.seuusuario.authservice.config; // ajuste conforme seu projeto
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,11 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                    .allowedOrigins("http://localhost:3000")
+                    .allowedOrigins(
+                        "http://localhost:3000",
+                        "http://servicofacil.ralk.com.br",
+                        "https://servicofacil.ralk.com.br" // inclua caso seu front use HTTPS
+                    )
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                     .allowedHeaders("*")
                     .allowCredentials(true);
