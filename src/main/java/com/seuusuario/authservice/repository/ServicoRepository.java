@@ -15,4 +15,8 @@ public interface ServicoRepository extends JpaRepository<Servico, Long> {
     Page<Servico> findByNomeContainingIgnoreCaseOrDescricaoContainingIgnoreCase(String nome, String descricao, Pageable pageable);
     // Se quiser sem filtro (todos paginados)
     Page<Servico> findAll(Pageable pageable);
+
+    Page<Servico> findByIdUsuario(Long idUsuario, Pageable pageable);
+
+
 }

@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "servicos") // <- Aqui
+@Table(name = "servicos")
 @Data
 @NoArgsConstructor
 public class Servico {
@@ -28,6 +30,25 @@ public class Servico {
 
     @Column(nullable = false)
     private Boolean ativo;
+
+    // Campos adicionais
+    private String cep;
+    private String bairro;
+    private String cidade;
+    private String uf;
+    private String ddd;
+    
+    @Column(name = "cod_ibge")
+    private String codIbge;
+
+    private String categoria;
+
+    @Column(name = "data_hora")
+    private LocalDateTime dataHora;
+
+    // Relacionamento com imagem (1:1)
+    @OneToOne(mappedBy = "servico", cascade = CascadeType.ALL)
+    private Imagem imagem;
 
     public boolean isAtivo() {
         return Boolean.TRUE.equals(ativo);

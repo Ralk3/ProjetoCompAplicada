@@ -6,10 +6,12 @@ import com.seuusuario.authservice.entity.Pagamento;
 import com.seuusuario.authservice.service.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Sort;
 
 import java.util.Optional;
 
@@ -29,13 +31,29 @@ public class PagamentoController {
         return ResponseEntity.ok(response);
     }
 
-    // 2. Listar pagamentos do usuário
-    @GetMapping
-    public ResponseEntity<Page<Pagamento>> listarPagamentos(Pageable pageable, Authentication authentication) {
-        Long userId = Long.parseLong(authentication.getName());
-        Page<Pagamento> pagamentos = pagamentoService.listarPagamentos(userId, pageable);
-        return ResponseEntity.ok(pagamentos);
+// 2. Listar pagamentos do usuário com ordenação
+@GetMapping
+public ResponseEntity<Page<Pagamento>> listarPagamentos(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size,
+        @RequestParam(defaultValue = "id") String sortBy,
+        @RequestParam(defaultValue = "desc") String direction,
+        Authentication authentication
+) {
+    Long userId = Long.parseLong(authentication.getName());
+
+    Sort sortOrder;
+    try {
+        sortOrder = Sort.by(Sort.Direction.fromString(direction.toUpperCase()), sortBy);
+    } catch (Exception e) {
+        sortOrder = Sort.by(Sort.Direction.DESC, "id");
     }
+
+    Pageable pageable = PageRequest.of(page, size, sortOrder);
+    Page<Pagamento> pagamentos = pagamentoService.listarPagamentos(userId, pageable);
+
+    return ResponseEntity.ok(pagamentos);
+}
 
     // 3. Buscar pagamento específico do usuário
     @GetMapping("/{id}")

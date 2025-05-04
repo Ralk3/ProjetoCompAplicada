@@ -59,6 +59,11 @@ public class ServicoService {
         return servicoRepository.findByIdUsuario(idUsuario);
     }
 
+    public Page<Servico> listarPorUsuario(Long idUsuario, Pageable pageable) {
+        return servicoRepository.findByIdUsuario(idUsuario, pageable);
+
+    }
+
     // 🔥 Novo método: listar com paginação e filtro de nome
     public Page<Servico> listarComFiltroEPaginacao(String termo, Pageable pageable) {
         if (termo != null && !termo.isEmpty()) {

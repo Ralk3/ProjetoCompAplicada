@@ -12,4 +12,5 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, Long> {
     // Buscar pagamentos de um usuário específico
     Page<Pagamento> findAllByUserId(Long userId, Pageable pageable);
 
+
 }
