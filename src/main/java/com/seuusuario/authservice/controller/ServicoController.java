@@ -43,7 +43,7 @@ public class ServicoController {
     public ResponseEntity<Page<Servico>> listarServicos(
             @RequestParam(required = false) String nome,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort) {
         Sort sortOrder = Sort.by(Sort.Direction.fromString(sort[1]), sort[0]);
         Pageable pageable = PageRequest.of(page, size, sortOrder);
