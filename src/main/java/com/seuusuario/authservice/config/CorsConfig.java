@@ -18,7 +18,7 @@ public class CorsConfig {
                         "http://localhost:5173",
 						"http://localhost:8080",
                         "http://servicofacil.ralk.com.br",
-                        "https://servicofacil.ralk.com.br". // inclua caso seu front use HTTPS
+                        "https://servicofacil.ralk.com.br", // inclua caso seu front use HTTPS
                         "https://servicofacil.online",
                         "http://servicofacil.online"
                     )
