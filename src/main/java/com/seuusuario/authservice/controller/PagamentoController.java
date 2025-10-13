@@ -35,7 +35,7 @@ public class PagamentoController {
 @GetMapping
 public ResponseEntity<Page<Pagamento>> listarPagamentos(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size,
+        @RequestParam(defaultValue = "5") int size,
         @RequestParam(defaultValue = "id") String sortBy,
         @RequestParam(defaultValue = "desc") String direction,
         Authentication authentication
